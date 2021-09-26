@@ -22,6 +22,5 @@ public class ArcadeAPI {
             return;
         }
         Arcade.getArcade().sendStartupMessage(); // instantiates the arcade instance, loading the rest of the mod.
-        MinecraftForge.EVENT_BUS.register(new TestClass());
     }
 }
