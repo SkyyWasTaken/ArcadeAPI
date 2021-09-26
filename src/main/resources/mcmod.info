@@ -1,0 +1,16 @@
+[
+{
+  "modid": "arcadeapi",
+  "name": "Arcade API",
+  "description": "An API for developing Hypixel arcade mods",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["SkyyWasTaken"],
+  "credits": "SkyyWasTaken",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
