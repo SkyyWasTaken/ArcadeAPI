@@ -1,6 +1,7 @@
 package us.skyywastaken.arcadeapi.arcade;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import us.skyywastaken.arcadeapi.ArcadeAPI;
 import us.skyywastaken.arcadeapi.arcade.game.ArcadeGame;
@@ -21,16 +22,12 @@ import us.skyywastaken.arcadeapi.arcade.game.pixelpainters.PixelPainters;
 import us.skyywastaken.arcadeapi.arcade.game.throwout.ThrowOut;
 import us.skyywastaken.arcadeapi.arcade.game.zombies.Zombies;
 
-import java.util.ArrayList;
-import java.util.ServiceLoader;
-import java.util.logging.LogManager;
-
 public class Arcade {
     private final static Arcade ARCADE_INSTANCE = new Arcade();
     private final ArcadeHandler ARCADE_HANDLER = new ArcadeHandler(this);
     private final ArcadeScoreboardListener ARCADE_SCOREBOARD_LISTENER = new ArcadeScoreboardListener(this.ARCADE_HANDLER);
     private GamePhase currentGamePhase;
-    private ArcadeGame currentGame;
+    private ArcadeGame currentGame = null;
 
     public Arcade() {
         registerGames();
@@ -50,7 +47,11 @@ public class Arcade {
         return currentGamePhase;
     }
 
-    void setCurrentGame(ArcadeGame newGame) {
+    void handleGameChange(ArcadeGame newGame) {
+        unregisterCurrentListeners();
+        if(newGame != null) {
+            registerListeners(newGame);
+        }
         this.currentGame = newGame;
     }
 
@@ -60,6 +61,16 @@ public class Arcade {
 
     public ArcadeGame getCurrentGame() {
         return this.currentGame;
+    }
+
+    private void unregisterCurrentListeners() {
+        if(this.currentGame == null || this.currentGame.getListeners() == null) {
+            return;
+        }
+        for(Object currentListener : this.currentGame.getListeners()) {
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Unregister attempt..."));
+            MinecraftForge.EVENT_BUS.unregister(currentListener);
+        }
     }
 
     private void registerListeners(ArcadeGame arcadeGame) {
@@ -92,7 +103,6 @@ public class Arcade {
 
     private void registerGame(ArcadeGame arcadeGame) {
         this.ARCADE_SCOREBOARD_LISTENER.registerGame(arcadeGame);
-        registerListeners(arcadeGame);
     }
 
     public void sendStartupMessage() {

@@ -23,19 +23,20 @@ public class ArcadeHandler {
         ArcadeGameLobbyJoinEvent joinEvent = new ArcadeGameLobbyJoinEvent(passedGame.getCopy());
         MinecraftForge.EVENT_BUS.post(joinEvent);
         this.ARCADE.setGamePhase(GamePhase.PREGAME);
-        this.ARCADE.setCurrentGame(passedGame);
+        this.ARCADE.handleGameChange(passedGame);
     }
 
     void onGameStart(ArcadeGame passedGame) {
         ArcadeGameStartEvent startEvent = new ArcadeGameStartEvent(passedGame.getCopy());
         MinecraftForge.EVENT_BUS.post(startEvent);
         this.ARCADE.setGamePhase(GamePhase.INGAME);
-        this.ARCADE.setCurrentGame(passedGame);
+        this.ARCADE.handleGameChange(passedGame);
     }
 
     void onGameLeave(ArcadeGame leftGame) {
         ArcadeGameLeaveEvent leaveEvent = new ArcadeGameLeaveEvent(leftGame.getCopy());
         MinecraftForge.EVENT_BUS.post(leaveEvent);
         this.ARCADE.setGamePhase(GamePhase.NONE);
+        this.ARCADE.handleGameChange(null);
     }
 }

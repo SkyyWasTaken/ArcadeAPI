@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class HoleInTheWall implements ArcadeGame {
-    private final Pattern END_GAME_REGEX = Pattern.compile("^ +Hole In The Wall"); // Forgive me for I hath sinned
+    private final Pattern END_GAME_REGEX = Pattern.compile("^ +Hole In The Wall.+"); // Forgive me for I hath sinned
     public HoleInTheWall() {
 
     }
