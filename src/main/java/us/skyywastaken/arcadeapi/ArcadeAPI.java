@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 @Mod(modid = ArcadeAPI.MODID, name = ArcadeAPI.NAME, version = ArcadeAPI.VERSION)
 public class ArcadeAPI {
     public static final String MODID = "arcadeapi";
-    public static final String VERSION = "0.0.1";
+    public static final String VERSION = "pre-release 0.0.1";
     public static final String NAME = "Arcade API";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 

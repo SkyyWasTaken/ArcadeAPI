@@ -1,4 +1,2 @@
-# ArcadeAPI
-A mod to make developing other mods that interect with Hypixel arcade games a bit easier. Note that the mod is in very early development and needs quite a bit of love before it's super useful.
-
-Will be expanded to games outside of the arcade once arcade development is complete.
+# ArcadeAPI (no-arcade)
+This is a (poorly) cut-down version of Arcade API created for the express reason of giving me access to scoreboard events for other mods. This version of the mod will be discontinued as soon as Arcade functionality is established. I will release updates to any of my mods to work with later versions of ArcadeAPI, provided there are incompatibilities between versions.

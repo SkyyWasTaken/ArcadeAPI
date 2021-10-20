@@ -30,8 +30,8 @@ public class Arcade {
     private ArcadeGame currentGame = null;
 
     public Arcade() {
-        registerGames();
-        registerArcadeListeners();
+        //registerGames();
+        //registerArcadeListeners();
     }
 
     private void registerArcadeListeners() {

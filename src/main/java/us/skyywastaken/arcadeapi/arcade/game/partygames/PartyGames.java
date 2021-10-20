@@ -1,6 +1,7 @@
 package us.skyywastaken.arcadeapi.arcade.game.partygames;
 
 import us.skyywastaken.arcadeapi.arcade.game.ArcadeGame;
+import us.skyywastaken.arcadeapi.arcade.game.partygames.game.PartyGameListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.regex.Pattern;
 
 public class PartyGames implements ArcadeGame {
     private final Pattern END_GAME_REGEX = Pattern.compile("^ +1st Place -.+\\u272E$");
+    private final PartyGameListener PARTY_GAME_LISTENER = new PartyGameListener();
     public PartyGames() {
 
     }
@@ -19,7 +21,7 @@ public class PartyGames implements ArcadeGame {
 
     @Override
     public List<Object> getListeners() {
-        return null;
+        return new ArrayList<Object>(Collections.singletonList(this.PARTY_GAME_LISTENER));
     }
 
     @Override
