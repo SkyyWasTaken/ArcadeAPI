@@ -1,7 +1,5 @@
 package us.skyywastaken.arcadeapi.arcade;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import us.skyywastaken.arcadeapi.arcade.game.ArcadeGame;
@@ -77,7 +75,6 @@ public class ArcadeScoreboardListener {
     }
 
     void registerGame(ArcadeGame gameToRegister) {
-        System.out.println(gameToRegister);
         this.DISPLAY_NAME_GAME_MAP.put(gameToRegister.getScoreboardDisplayName(), gameToRegister);
         this.INTERNAL_NAME_GAME_MAP.put(gameToRegister.getInternalScoreboardName(), gameToRegister);
     }

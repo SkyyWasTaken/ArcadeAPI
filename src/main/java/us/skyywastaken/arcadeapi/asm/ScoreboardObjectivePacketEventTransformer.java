@@ -1,6 +1,5 @@
 package us.skyywastaken.arcadeapi.asm;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.objectweb.asm.tree.ClassNode;
@@ -12,14 +11,14 @@ import java.util.HashMap;
 @IFMLLoadingPlugin.TransformerExclusions("us.skyywastaken.nametagenabler.asm")
 @IFMLLoadingPlugin.MCVersion("1.8.9")
 public class ScoreboardObjectivePacketEventTransformer implements IClassTransformer {
-    private HashMap<String, String> obfuscatedMappings = getObfuscatedMappingsMap();
-    private HashMap<String, String> deObfuscatedMappings = getDeObfuscatedMappingsMap();
+    private final HashMap<String, String> obfuscatedMappings = getObfuscatedMappingsMap();
+    private final HashMap<String, String> deObfuscatedMappings = getDeObfuscatedMappingsMap();
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
-        if(obfuscatedMappings.get("className").equals(name)) {
+        if (obfuscatedMappings.get("className").equals(name)) {
             return transformClass(basicClass, obfuscatedMappings);
-        } else if(deObfuscatedMappings.get("className").equals(name)) {
+        } else if (deObfuscatedMappings.get("className").equals(name)) {
             return transformClass(basicClass, deObfuscatedMappings);
         } else {
             return basicClass;
@@ -31,7 +30,7 @@ public class ScoreboardObjectivePacketEventTransformer implements IClassTransfor
         MethodNode methodNode = ASMHelper.getMethodNodeFromClassNode(classNode, mappings);
         HashMap<String, String> eventMappings = generateObjectivePacketEventMappings();
         InsnList eventInstructions = ASMHelper.generateNewEventInstructions(eventMappings);
-        ASMHelper.prependInsnListToMethodNodeInsns(methodNode, eventInstructions);
+        ASMHelper.prependInsnListToMethodNodeInsnsAfterThreadCheck(methodNode, eventInstructions);
         return ASMHelper.getByteArrayFromClassNode(classNode);
     }
 

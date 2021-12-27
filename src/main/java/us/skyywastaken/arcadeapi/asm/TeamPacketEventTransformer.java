@@ -11,14 +11,14 @@ import java.util.HashMap;
 @IFMLLoadingPlugin.TransformerExclusions("us.skyywastaken.arcadeapi.asm")
 @IFMLLoadingPlugin.MCVersion("1.8.9")
 public class TeamPacketEventTransformer implements IClassTransformer {
-    private HashMap<String, String> obfuscatedMappings = getObfuscatedMappingsMap();
-    private HashMap<String, String> deObfuscatedMappings = getDeObfuscatedMappingsMap();
+    private final HashMap<String, String> obfuscatedMappings = getObfuscatedMappingsMap();
+    private final HashMap<String, String> deObfuscatedMappings = getDeObfuscatedMappingsMap();
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
-        if(obfuscatedMappings.get("className").equals(name)) {
+        if (obfuscatedMappings.get("className").equals(name)) {
             return transformClass(basicClass, obfuscatedMappings);
-        } else if(deObfuscatedMappings.get("className").equals(name)) {
+        } else if (deObfuscatedMappings.get("className").equals(name)) {
             return transformClass(basicClass, deObfuscatedMappings);
         } else {
             return basicClass;
@@ -30,7 +30,7 @@ public class TeamPacketEventTransformer implements IClassTransformer {
         MethodNode methodNode = ASMHelper.getMethodNodeFromClassNode(classNode, mappings);
         HashMap<String, String> eventMappings = generateTeamPacketEventMappings();
         InsnList eventInstructions = ASMHelper.generateNewEventInstructions(eventMappings);
-        ASMHelper.prependInsnListToMethodNodeInsns(methodNode, eventInstructions);
+        ASMHelper.prependInsnListToMethodNodeInsnsAfterThreadCheck(methodNode, eventInstructions);
         return ASMHelper.getByteArrayFromClassNode(classNode);
     }
 

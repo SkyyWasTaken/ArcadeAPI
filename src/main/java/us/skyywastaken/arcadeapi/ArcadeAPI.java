@@ -1,13 +1,11 @@
 package us.skyywastaken.arcadeapi;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import us.skyywastaken.arcadeapi.arcade.Arcade;
-
-import org.apache.logging.log4j.LogManager;
 
 @Mod(modid = ArcadeAPI.MODID, name = ArcadeAPI.NAME, version = ArcadeAPI.VERSION)
 public class ArcadeAPI {
@@ -21,6 +19,6 @@ public class ArcadeAPI {
         if(event.getSide() == Side.SERVER) {
             return;
         }
-        Arcade.getArcade().sendStartupMessage(); // instantiates the arcade instance, loading the rest of the mod.
+        Arcade.getArcade().sendStartupMessage(); // instantiates the arcade instance, loading the rest of the mod. jank.
     }
 }

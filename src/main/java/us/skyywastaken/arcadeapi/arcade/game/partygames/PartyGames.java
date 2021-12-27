@@ -1,20 +1,31 @@
 package us.skyywastaken.arcadeapi.arcade.game.partygames;
 
 import us.skyywastaken.arcadeapi.arcade.game.ArcadeGame;
+import us.skyywastaken.arcadeapi.arcade.game.partygames.game.PartyGame;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
 public class PartyGames implements ArcadeGame {
     private final Pattern END_GAME_REGEX = Pattern.compile("^ +1st Place -.+\\u272E$");
-    public PartyGames() {
+    private final boolean IS_PG_COPY;
+    private final PartyGameManager PARTY_GAME_MANAGER;
 
+    public PartyGames() {
+        this.IS_PG_COPY = false;
+        this.PARTY_GAME_MANAGER = new PartyGameManager();
     }
 
-    public PartyGames(PartyGames partyGames) {
+    public PartyGames(PartyGames passedPartyGames) {
+        this.IS_PG_COPY = true;
+        this.PARTY_GAME_MANAGER = passedPartyGames.PARTY_GAME_MANAGER.getCopy();
+    }
 
+    public PartyGame getCurrentPartyGame() {
+        return this.PARTY_GAME_MANAGER.getCurrentPartyGame();
+    }
+
+    private void registerGames() {
     }
 
     @Override
@@ -44,6 +55,6 @@ public class PartyGames implements ArcadeGame {
 
     @Override
     public void reset() {
-
+        this.PARTY_GAME_MANAGER.reset();
     }
 }

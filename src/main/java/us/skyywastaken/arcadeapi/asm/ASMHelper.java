@@ -31,12 +31,12 @@ public class ASMHelper {
         return classWriter.toByteArray();
     }
 
-    public static void prependInsnListToMethodNodeInsns(MethodNode methodNode, InsnList insnListToPrepend) {
+    public static void prependInsnListToMethodNodeInsnsAfterThreadCheck(MethodNode methodNode, InsnList insnListToPrepend) {
         AbstractInsnNode keyInsnNode = null;
         Iterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
-        while(iterator.hasNext()) { // The new instructions have to be after the game makes sure it's on the main thread
+        while (iterator.hasNext()) { // The new instructions have to be after the game makes sure it's on the main thread
             AbstractInsnNode currentInsn = iterator.next(); // or it fires the event twice.
-            if(currentInsn.getOpcode() == Opcodes.INVOKESTATIC) {
+            if (currentInsn.getOpcode() == Opcodes.INVOKESTATIC) {
                 keyInsnNode = currentInsn;
                 break;
             }

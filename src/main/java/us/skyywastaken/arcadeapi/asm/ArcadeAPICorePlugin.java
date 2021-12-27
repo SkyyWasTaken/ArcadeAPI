@@ -9,7 +9,8 @@ public class ArcadeAPICorePlugin implements IFMLLoadingPlugin {
     @Override
     public String[] getASMTransformerClass() {
         return new String[]{"us.skyywastaken.arcadeapi.asm.TeamPacketEventTransformer",
-                "us.skyywastaken.arcadeapi.asm.ScoreboardObjectivePacketEventTransformer"};
+                "us.skyywastaken.arcadeapi.asm.ScoreboardObjectivePacketEventTransformer",
+                "us.skyywastaken.arcadeapi.asm.BossBarUpdateEventTransformer"};
     }
 
     @Override
